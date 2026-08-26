@@ -36,3 +36,38 @@ footer{padding:28px 0;background:#0b1320;color:#b9c8d8;font-size:13px}.footer-in
 .hero h1{
   max-width:900px;
 }
+
+/* V15 knowledge-first homepage */
+.knowledge-hero{padding:112px 0 104px;background:radial-gradient(circle at 82% 25%,rgba(37,99,235,.14),transparent 32%),linear-gradient(135deg,#fff 0%,#f4f8ff 100%);border-bottom:1px solid var(--line)}
+.knowledge-hero h1{font-size:clamp(54px,7vw,92px);max-width:900px;margin:10px 0 24px}
+.knowledge-hero .hero-copy{font-size:20px;color:var(--muted);max-width:720px;margin:0 0 30px}
+.knowledge-section{padding-top:86px}
+.section-heading{display:flex;justify-content:space-between;align-items:end;gap:50px;margin-bottom:38px}
+.section-heading h2{margin-bottom:0}
+.section-heading>p{max-width:480px;color:var(--muted);margin:0}
+.topic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.topic-card{position:relative;min-height:270px;padding:30px;text-decoration:none;border-radius:18px;border:1px solid #d8e3ef;background:#fff;box-shadow:0 8px 25px rgba(20,55,100,.05);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.topic-card:hover{transform:translateY(-5px);box-shadow:0 20px 45px rgba(20,70,150,.12);border-color:#9fc0ee}
+.topic-card h3{font-size:36px;margin:30px 0 8px;letter-spacing:-.04em}
+.topic-card p{color:var(--muted);max-width:470px;margin:0 0 28px}
+.topic-top{display:flex;justify-content:space-between;font-size:11px;font-weight:800;letter-spacing:.12em;color:#2563eb}
+.topic-link{font-size:13px;font-weight:800;color:#145fd0}
+.topic-link b{margin-left:6px}
+.topic-6g{background:linear-gradient(135deg,#eff8ff 0%,#f4fbff 100%)}
+.topic-5g{background:linear-gradient(135deg,#f2f5ff 0%,#f8fbff 100%)}
+.topic-lte{background:linear-gradient(135deg,#f5f8fc 0%,#fff 100%)}
+.topic-sip{background:linear-gradient(135deg,#f2fbf9 0%,#fff 100%)}
+.topic-logs{grid-column:1/-1;background:linear-gradient(135deg,#fff7ec 0%,#fff 100%)}
+.technology-strip{padding:52px 0;background:#0b1320;color:#fff}
+.tech-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.tech-row span{padding:9px 14px;border:1px solid rgba(255,255,255,.16);border-radius:999px;color:#dce9ff;background:rgba(255,255,255,.04);font-size:13px;font-weight:700}
+.about-section{padding-top:92px}
+.external-resources{padding-top:72px}
+@media(max-width:850px){
+ .section-heading{display:block}.section-heading>p{margin-top:16px}
+ .topic-grid{grid-template-columns:1fr}.topic-logs{grid-column:auto}
+}
+@media(max-width:620px){
+ .knowledge-hero{padding:78px 0 72px}.knowledge-hero h1{font-size:52px}
+ .topic-card{min-height:230px;padding:24px}.topic-card h3{font-size:31px}
+}
