@@ -1,12 +1,12 @@
-# Nishant Tyagi — Telecom Knowledge Base + Technical Portfolio
+# Nishant Tyagi — Telecom Knowledge Base & Portfolio
 
-Telecom Consultant with 13+ years of hands-on experience across 5G NR, Network Slicing, LTE, VoLTE, NB-IoT, LTE-M and device certification.
+A GitHub Pages-ready personal telecom knowledge and portfolio website.
 
-## Website structure
-- `index.html` — homepage
-- `topics/` — telecom knowledge articles
-- `projects/` — technical portfolio pages
-- `css/` — website styling
-- `js/` — search behavior
+## Edit the site
+- Homepage: `index.html`
+- Styles: `css/style.css`
+- Search: `js/app.js`
+- Knowledge articles: `topics/`
+- Projects: `projects/`
 
-GitHub Pages can publish this repository directly from the `main` branch and root folder.
+The site is designed for GitHub Pages from the repository root on the `main` branch.

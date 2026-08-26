@@ -1,1 +1,1 @@
-const search=document.getElementById('search');const cards=[...document.querySelectorAll('.searchable')];if(search){search.addEventListener('input',()=>{const q=search.value.toLowerCase().trim();cards.forEach(c=>c.style.display=(!q||c.dataset.search.includes(q))?'block':'none')})}
+const s=document.getElementById('search');const cards=[...document.querySelectorAll('.searchable')];if(s)s.addEventListener('input',()=>{const q=s.value.toLowerCase().trim();cards.forEach(c=>c.style.display=!q||c.dataset.search.includes(q)?'block':'none')});
