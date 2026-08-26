@@ -6,5 +6,8 @@
 <tr><td>5QI</td><td>A standardized QoS identifier used to characterize QoS treatment.</td></tr>
 <tr><td>QoS Flow</td><td>A logical unit of traffic with a defined QoS profile.</td></tr>
 <tr><td>DRB</td><td>Data Radio Bearer used to carry user-plane traffic over NR.</td></tr></table>
-<h2>Validation idea</h2><p>When testing a QoS requirement, validate the complete chain: application traffic → core QoS policy → QoS flow → radio configuration → measured behaviour.</p></div></section></main>
+<h2>Validation idea</h2><p>When testing a QoS requirement, validate the complete chain: application traffic → core QoS policy → QoS flow → radio configuration → measured behaviour.</p><h2>QoS in simple terms</h2><p>QoS is about giving different traffic the treatment it needs. In 5G, the QoS flow is the logical unit used to apply QoS treatment. The network can map that flow toward radio resources and a data path that supports the required service behaviour.</p>
+<h2>5QI and QoS flow</h2><p>5QI is an identifier associated with a defined QoS treatment. A QoS flow groups traffic that should receive the same QoS handling. The practical question is not just which 5QI is configured, but whether the expected QoS behaviour is visible across the complete path.</p>
+<h2>From policy to radio</h2><p>For validation, connect application traffic, core policy, QoS flow, radio bearer and measured performance. If one part of that chain is wrong, the final throughput or latency result may be misleading.</p>
+<h2>Further reading</h2><p>Use this page as the starting theory. Next, compare the concepts with your own UE logs, protocol traces and test observations. Standards and implementation details can change across releases, so treat this page as a practical learning note.</p></div></section></main>
 <footer><div class="container footer-inner"><span>© 2026 Nishant Tyagi</span><span>5G NR Knowledge Base</span></div></footer></body></html>

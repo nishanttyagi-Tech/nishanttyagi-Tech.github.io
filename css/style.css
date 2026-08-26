@@ -109,3 +109,8 @@ footer{padding:28px 0;border-top:1px solid var(--line);color:#697789;font-size:1
 .hero-card .focus-link:hover{color:#315efb}
 .hero-card .focus-link:hover .focus-arrow{color:#315efb;transform:translate(2px,-2px)}
 .hero-card .focus-link:hover .focus-content small{color:#315efb}
+
+.sources{border-top:1px solid var(--line)}
+.sources .source-links{margin-top:28px}
+.sources .source-links a{transition:.2s}
+.sources .source-links a:hover{border-color:#b9c8d8;transform:translateY(-2px)}
