@@ -1,14 +1,15 @@
-# Nishant Tyagi — Telecom Technology Knowledge Base
+# Nishant Tyagi — Telecom Knowledge Hub
 
-Knowledge-first personal website focused on 6G, 5G, LTE, SIP and practical log analysis.
+A GitHub Pages-ready telecom knowledge website covering 6G, 5G/NR, LTE, SIP and log analysis.
 
-## Homepage structure
-- 6G
-- 5G
-- LTE
-- SIP
-- Log Analysis
+## Structure
+- `index.html` — knowledge-first homepage
+- `topics/6g.html`
+- `topics/5g-architecture.html`
+- `topics/lte.html`
+- `topics/sip.html`
+- `topics/log-analysis.html`
+- `about.html` — professional profile
+- `css/style.css` — responsive visual design
 
-Professional background is kept on `about.html` so the homepage remains focused on technology knowledge.
-
-External technical references are intentionally placed at the bottom of the homepage.
+The homepage is intentionally knowledge-first. Professional background is kept on the About page, while standards and external resources appear at the bottom.
