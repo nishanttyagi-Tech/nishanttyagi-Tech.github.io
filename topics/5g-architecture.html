@@ -110,7 +110,7 @@
 <section id="s2" class="topic-section">
   <div class="topic-number">02</div>
   <div>
-    <h2>5G Architecture</h2>
+    <h2>5G Architecture</h2><figure class="pdf-figure"><img src="../assets/5g/fig21-sa-architecture.png" alt="Standalone 5G base-station architecture."><figcaption>Standalone 5G base-station architecture. Adapted from the supplied PDF figure.</figcaption></figure>
     <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
     <p>The end-to-end model is UE → NR/NG-RAN → 5GC → Data Network. SA uses NR with 5GC; NSA uses NR together with LTE/EPC or other migration architectures. The RAN provides radio access while the core provides registration, authentication, mobility, session management, policy and user-plane connectivity.</p>
   </div>
@@ -166,7 +166,7 @@
 <section id="s9" class="topic-section">
   <div class="topic-number">09</div>
   <div>
-    <h2>Interfaces</h2>
+    <h2>Interfaces</h2><figure class="pdf-figure"><img src="../assets/5g/fig47-ng-interface-stack.png" alt="NG interface control-plane and user-plane protocol stack."><figcaption>NG interface control-plane and user-plane protocol stack. Adapted from the supplied PDF figure.</figcaption></figure>
     <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
     <p>Important interfaces include Uu, NG/N2/N3, Xn, F1, E1, N1, N2, N3, N4 and N6. NG-C uses NGAP over SCTP/IP; NG-U uses GTP-U over UDP/IP. Xn supports RAN coordination and mobility.</p>
   </div>
@@ -182,7 +182,7 @@
 <section id="s11" class="topic-section">
   <div class="topic-number">11</div>
   <div>
-    <h2>Standalone and Non-Standalone</h2>
+    <h2>Standalone and Non-Standalone</h2><figure class="pdf-figure"><img src="../assets/5g/fig22-nsa-architecture.png" alt="Non-Standalone base-station architecture using the 4G Core."><figcaption>Non-Standalone base-station architecture using the 4G Core. Adapted from the supplied PDF figure.</figcaption></figure>
     
     <p>SA uses NR plus 5GC. NSA allows NR to be introduced while LTE/EPC or migration architectures remain part of the service path. EN-DC uses LTE as master and NR as secondary; MCG, SCG and split bearers are important concepts.</p>
   </div>
@@ -190,7 +190,7 @@
 <section id="s12" class="topic-section">
   <div class="topic-number">12</div>
   <div>
-    <h2>Multi-Connectivity</h2>
+    <h2>Multi-Connectivity</h2><figure class="pdf-figure"><img src="../assets/5g/fig25-endc-bearers.png" alt="MCG, SCG and split bearers for EN-DC."><figcaption>MCG, SCG and split bearers for EN-DC. Adapted from the supplied PDF figure.</figcaption></figure>
     <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
     <p>Multi-connectivity can combine master and secondary nodes. Bearer choices include MCG bearer, SCG bearer and split bearer, allowing traffic to use LTE, NR or both depending on configuration.</p>
   </div>
@@ -230,7 +230,7 @@
 <section id="s17" class="topic-section">
   <div class="topic-number">17</div>
   <div>
-    <h2>Resource Grid</h2>
+    <h2>Resource Grid</h2><figure class="pdf-figure"><img src="../assets/5g/fig109-resource-block-offsets.png" alt="Resource Block and subcarrier offsets for Frequency Range 1."><figcaption>Resource Block and subcarrier offsets for Frequency Range 1. Adapted from the supplied PDF figure.</figcaption></figure>
     
     <p>The basic time-frequency unit is the Resource Element. Twelve consecutive subcarriers form a Resource Block. Bandwidth Parts allow a UE to operate on a configured subset of the carrier resource grid.</p>
   </div>
@@ -318,7 +318,7 @@
 <section id="s28" class="topic-section">
   <div class="topic-number">28</div>
   <div>
-    <h2>Modulation and Coding</h2>
+    <h2>Modulation and Coding</h2><figure class="pdf-figure"><img src="../assets/5g/fig131-cp-ofdm.png" alt="Generation of the CP-OFDM waveform."><figcaption>Generation of the CP-OFDM waveform. Adapted from the supplied PDF figure.</figcaption></figure>
     
     <p>NR supports QPSK, 16QAM, 64QAM and higher-order modulation depending on configuration and capability. LDPC is used for shared-channel data coding; Polar coding is used for relevant control/broadcast information.</p>
   </div>
@@ -422,7 +422,7 @@
 <section id="s41" class="topic-section">
   <div class="topic-number">41</div>
   <div>
-    <h2>PDU Session</h2>
+    <h2>PDU Session</h2><figure class="pdf-figure"><img src="../assets/5g/fig11-pdu-session.png" alt="Concept of a 5G PDU Session."><figcaption>Concept of a 5G PDU Session. Adapted from the supplied PDF figure.</figcaption></figure>
     <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
     <p>A PDU Session provides connectivity between UE and a DNN through the 5GC. It can carry multiple QoS flows and can support IPv4, IPv6, IPv4v6, Ethernet or unstructured traffic depending on configuration.</p>
   </div>
@@ -430,7 +430,7 @@
 <section id="s42" class="topic-section">
   <div class="topic-number">42</div>
   <div>
-    <h2>PDU Session Establishment</h2>
+    <h2>PDU Session Establishment</h2><figure class="pdf-figure"><img src="../assets/5g/fig12-gtpu-tunnel.png" alt="Concept of a GTP-U tunnel between the base station and UPF."><figcaption>Concept of a GTP-U tunnel between the base station and UPF. Adapted from the supplied PDF figure.</figcaption></figure>
     <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
     <p>The UE requests a PDU Session; AMF transfers session-management signalling toward SMF; SMF selects/configures UPF and policy; the RAN receives resource configuration; the UE receives the PDU Session Establishment Accept.</p>
   </div>
@@ -438,7 +438,7 @@
 <section id="s43" class="topic-section">
   <div class="topic-number">43</div>
   <div>
-    <h2>QoS and 5QI</h2>
+    <h2>QoS and 5QI</h2><figure class="pdf-figure"><img src="../assets/5g/fig13-qos-flow-mapping.png" alt="Mapping downlink packets onto QoS Flows at the UPF."><figcaption>Mapping downlink packets onto QoS Flows at the UPF. Adapted from the supplied PDF figure.</figcaption></figure>
     <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
     <p>A QoS Flow is the finest QoS granularity in the 5G user plane. 5QI identifies standardized or operator-specific QoS characteristics. QoS flows are mapped to DRBs by SDAP and ultimately to transport tunnels.</p>
   </div>
