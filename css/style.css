@@ -60,3 +60,11 @@ footer{padding:28px 0;border-top:1px solid var(--line);color:#697789;font-size:1
 .expertise-strip strong{font-size:14px}
 .about-role{color:#64758a;font-weight:700}
 @media(max-width:850px){.expertise-strip{grid-template-columns:1fr}.expertise-strip>div{border-right:0;border-bottom:1px solid var(--line);padding:12px 0}.expertise-strip>div:last-child{border-bottom:0}}
+
+.focus-links{margin-top:16px}
+.focus-links a{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 0;border-top:1px solid var(--line);color:inherit;text-decoration:none;font-weight:750;transition:transform .18s ease, color .18s ease}
+.focus-links a:last-child{border-bottom:0}
+.focus-links a:hover{transform:translateX(5px);color:#315efb}
+.focus-links b{font-size:18px;font-weight:700;opacity:.55}
+.focus-links a:hover b{opacity:1}
+.focus-hint{margin:12px 0 0;color:#718198;font-size:12px}
