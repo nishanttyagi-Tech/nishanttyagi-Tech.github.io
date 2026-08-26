@@ -1,15 +1,12 @@
-# Nishant Tyagi — Personal Telecom Knowledge + Portfolio
+# Nishant Tyagi — Telecom Knowledge Base + Technical Portfolio
 
-Open `index.html` locally, or deploy this folder to a static host.
+Telecom Consultant with 13+ years of hands-on experience across 5G NR, Network Slicing, LTE, VoLTE, NB-IoT, LTE-M and device certification.
 
-## Add a knowledge article
-1. Copy any file in `topics/`.
-2. Rename it.
-3. Edit the article.
-4. Add a card in `index.html`.
+## Website structure
+- `index.html` — homepage
+- `topics/` — telecom knowledge articles
+- `projects/` — technical portfolio pages
+- `css/` — website styling
+- `js/` — search behavior
 
-## Add a project
-Copy a file in `projects/`, edit the content, and add its card to the Projects section.
-
-## Important
-Professional details such as current role, experience, education and certifications are intentionally not invented. Add them in the About section when ready.
+GitHub Pages can publish this repository directly from the `main` branch and root folder.

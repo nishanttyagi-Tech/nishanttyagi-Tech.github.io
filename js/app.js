@@ -1,3 +1,1 @@
-const nav=document.querySelector('.nav'),menu=document.querySelector('.menu');if(menu)menu.onclick=()=>nav.classList.toggle('menu-open');
-const search=document.querySelector('#search'), cards=[...document.querySelectorAll('.searchable')];
-if(search)search.addEventListener('input',()=>{const q=search.value.toLowerCase().trim();cards.forEach(c=>c.style.display=(!q||c.dataset.search.includes(q))?'block':'none')});
+const search=document.getElementById('search');const cards=[...document.querySelectorAll('.searchable')];if(search){search.addEventListener('input',()=>{const q=search.value.toLowerCase().trim();cards.forEach(c=>c.style.display=(!q||c.dataset.search.includes(q))?'block':'none')})}
