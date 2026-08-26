@@ -1,0 +1,14 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>5G NR Resource Grid | Nishant Tyagi</title><link rel="stylesheet" href="../css/style.css"></head><body>
+<header class="site-header"><div class="container nav"><a class="brand" href="../index.html">Nishant Tyagi</a><nav><a href="../index.html#knowledge">Knowledge</a><a href="../index.html#expertise">Expertise</a><a href="../index.html#about">About</a></nav></div></header>
+<main><section class="page-hero"><div class="container"><a class="back" href="../index.html#knowledge">← Back to 5G knowledge</a><p class="eyebrow">5G NR KNOWLEDGE BASE</p><h1>5G NR Resource Grid</h1><p class="lead">See how time and frequency resources are organized in NR.</p></div></section>
+<section class="section"><div class="container prose"><h2>What is the resource grid?</h2>
+<p>The resource grid is the time-frequency map used to describe NR transmissions. 3GPP defines a resource grid for a given numerology, carrier and transmission direction such as downlink or uplink.</p>
+<table class="simple-table"><tr><th>Term</th><th>Simple meaning</th></tr>
+<tr><td>Resource element (RE)</td><td>One subcarrier in one OFDM symbol.</td></tr>
+<tr><td>Resource block</td><td>A group of subcarriers used as a basic scheduling resource.</td></tr>
+<tr><td>OFDM symbol</td><td>A time-domain unit in the grid.</td></tr>
+<tr><td>Slot</td><td>A collection of symbols used for scheduling and transmission timing.</td></tr></table>
+<h2>Why this is useful in log analysis</h2><p>If a trace shows a bandwidth, SCS, BWP or allocation change, the resource-grid view helps translate configuration into what the radio is actually scheduling.</p>
+<div class="note"><strong>Practical habit:</strong> whenever you see a resource allocation problem, record carrier bandwidth, SCS, BWP, slot timing and the physical channel involved before looking for the root cause.</div>
+<p><a href="https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=3213" target="_blank" rel="noopener">3GPP TS 38.211 ↗</a></p></div></section></main>
+<footer><div class="container footer-inner"><span>© 2026 Nishant Tyagi</span><span>5G NR Knowledge Base</span></div></footer></body></html>

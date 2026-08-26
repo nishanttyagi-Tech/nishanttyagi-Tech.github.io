@@ -1,0 +1,14 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>5G NR Physical Channels | Nishant Tyagi</title><link rel="stylesheet" href="../css/style.css"></head><body>
+<header class="site-header"><div class="container nav"><a class="brand" href="../index.html">Nishant Tyagi</a><nav><a href="../index.html#knowledge">Knowledge</a><a href="../index.html#expertise">Expertise</a><a href="../index.html#about">About</a></nav></div></header>
+<main><section class="page-hero"><div class="container"><a class="back" href="../index.html#knowledge">← Back to 5G knowledge</a><p class="eyebrow">5G NR KNOWLEDGE BASE</p><h1>5G NR Physical Channels</h1><p class="lead">A simple guide to PDSCH, PUSCH, PDCCH and PUCCH.</p></div></section>
+<section class="section"><div class="container prose"><h2>Control vs user data</h2>
+<p>A useful first distinction is between channels that mainly carry user data and channels that carry control information.</p>
+<table class="simple-table"><tr><th>Channel</th><th>Direction</th><th>Simple role</th></tr>
+<tr><td>PDSCH</td><td>Downlink</td><td>Downlink shared channel for user data and some higher-layer information.</td></tr>
+<tr><td>PUSCH</td><td>Uplink</td><td>Uplink shared channel for UE data and configured/control information.</td></tr>
+<tr><td>PDCCH</td><td>Downlink</td><td>Carries downlink control information used for scheduling and control.</td></tr>
+<tr><td>PUCCH</td><td>Uplink</td><td>Uplink control information such as HARQ feedback and scheduling-related information.</td></tr></table>
+<h2>Debugging approach</h2><p>Do not treat a missing data packet as automatically a PHY problem. Check whether control signalling successfully scheduled the transmission, whether the UE was configured correctly and whether higher layers requested data.</p>
+<div class="note"><strong>Reference:</strong> TS 38.211 is the main 3GPP specification for NR physical channels and modulation; TS 38.213 and TS 38.214 cover important physical-layer control and data procedures.</div>
+<p><a href="https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=3213" target="_blank" rel="noopener">38.211 ↗</a> · <a href="https://portal.3gpp.org/Specifications.aspx?WiUid=750167&q=1" target="_blank" rel="noopener">38.213 / 38.214 ↗</a></p></div></section></main>
+<footer><div class="container footer-inner"><span>© 2026 Nishant Tyagi</span><span>5G NR Knowledge Base</span></div></footer></body></html>

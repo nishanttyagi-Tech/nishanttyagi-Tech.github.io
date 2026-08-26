@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>5G NR Architecture | Nishant Tyagi</title><link rel="stylesheet" href="../css/style.css"></head><body>
+<header class="site-header"><div class="container nav"><a class="brand" href="../index.html">Nishant Tyagi</a><nav><a href="../index.html#knowledge">Knowledge</a><a href="../index.html#expertise">Expertise</a><a href="../index.html#about">About</a></nav></div></header>
+<main><section class="page-hero"><div class="container"><a class="back" href="../index.html#knowledge">← Back to 5G knowledge</a><p class="eyebrow">5G NR KNOWLEDGE BASE</p><h1>5G NR Architecture</h1><p class="lead">How UE, gNB, NG-RAN and the 5G Core fit together.</p></div></section>
+<section class="section"><div class="container prose"><h2>The big picture</h2>
+<p>In a simple view, a 5G system has the <strong>UE</strong>, the <strong>NG-RAN</strong> and the <strong>5G Core</strong>. The gNB provides NR radio access. NG-RAN connects toward the 5G Core over NG interfaces, while NG-RAN nodes can also communicate over Xn.</p>
+<table class="simple-table"><tr><th>Part</th><th>Simple meaning</th></tr>
+<tr><td>UE</td><td>The phone, modem or device using the network.</td></tr>
+<tr><td>gNB</td><td>The 5G radio access node that terminates NR control/user-plane protocols toward the UE.</td></tr>
+<tr><td>AMF</td><td>Core function responsible for access and mobility management.</td></tr>
+<tr><td>SMF</td><td>Core function responsible for session management.</td></tr>
+<tr><td>UPF</td><td>User-plane function that forwards user traffic.</td></tr></table>
+<h2>How to think during troubleshooting</h2>
+<p>When a test fails, first decide whether the evidence points to radio access, signalling, session management or user-plane forwarding. This prevents jumping between layers without a timeline.</p>
+<div class="note"><strong>3GPP reference:</strong> TS 38.300 describes NR and NG-RAN overall architecture and procedures. The current 3GPP specification list also includes dedicated specifications for RRC, MAC, RLC and PDCP.</div>
+<p><a href="https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=3200" target="_blank" rel="noopener">3GPP specifications ↗</a></p></div></section></main>
+<footer><div class="container footer-inner"><span>© 2026 Nishant Tyagi</span><span>5G NR Knowledge Base</span></div></footer></body></html>
