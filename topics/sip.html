@@ -1,1 +1,116 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SIP | Nishant Tyagi Knowledge Hub</title><link rel="stylesheet" href="../css/style.css"></head><body><header class="site-header"><div class="container topbar"><a class="brand" href="../index.html"><span class="brand-title">Telecom Knowledge Hub</span><small>Nishant Tyagi</small></a><div class="search"><input placeholder="Search knowledge base..."><button>⌕</button></div><div class="toplinks"><a href="../about.html">About</a><a href="https://www.linkedin.com/in/nishant-tyagi-5ab70824a/">LinkedIn</a></div></div><nav class="topic-nav"><a href="5g-architecture.html">5G / NR</a><a href="6g.html">6G</a><a href="lte.html">LTE</a><a class="active" href="sip.html">SIP</a><a href="log-analysis.html">Log Analysis</a><a href="../index.html#references">References</a></nav></header><main class="container article-page"><div class="article-layout"><aside class="article-nav"><h3>SIP Topics</h3><a href="#what">What is SIP?</a><a href="#register">REGISTER</a><a href="#invite">INVITE</a><a href="#responses">Responses</a><a href="#callflow">Call flow</a><a href="#ims">IMS connection</a></aside><article class="article-content"><p class="eyebrow">SESSION INITIATION PROTOCOL</p><h1>SIP fundamentals and call flows</h1><p class="lead">SIP is a signalling protocol used to establish, modify and terminate communication sessions. In telecom, it is especially important when understanding IMS and packet voice.</p><h2 id="what">What is SIP?</h2><p>SIP messages create and manage sessions. The signalling is separate from the media itself, which is commonly described through SDP information carried within SIP messages.</p><h2 id="register">REGISTER</h2><p>A REGISTER transaction is used by a user agent to register its contact information with the relevant SIP/IMS infrastructure.</p><h2 id="invite">INVITE</h2><p>INVITE begins a session establishment attempt. The following responses and acknowledgements build the call flow and show whether the session is progressing correctly.</p><h2 id="responses">Responses</h2><p>Responses use status classes such as provisional, successful and error responses. Reading the sequence is often more useful than looking at one message in isolation.</p><h2 id="callflow">Simple call flow</h2><ol><li>REGISTER and authentication.</li><li>INVITE with session information.</li><li>Provisional response while the session is being processed.</li><li>Successful response with negotiated session details.</li><li>ACK confirms establishment.</li><li>BYE terminates the session.</li></ol><h2 id="ims">SIP and IMS</h2><p>IMS uses SIP as a key signalling mechanism for multimedia services. For troubleshooting, correlate SIP messages with UE logs, IP traces and radio/core events rather than analysing SIP in isolation.</p></article></div></main><footer class="site-footer"><div class="container copyright"><span>© 2026 Nishant Tyagi</span><span><a href="../index.html">Back to Knowledge Hub</a></span></div></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIP | Nishant Tyagi Knowledge Hub</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="site-header"><div class="container topbar"><a class="brand" href="../index.html"><span class="brand-title">Telecom Knowledge Hub</span><small>Nishant Tyagi</small></a><div class="search"><input placeholder="Search knowledge base..."><button>⌕</button></div><div class="toplinks"><a href="../about.html">About</a><a href="https://www.linkedin.com/in/nishant-tyagi-5ab70824a/">LinkedIn</a></div></div><nav class="topic-nav"><a href="5g-architecture.html">5G / NR</a><a href="6g.html">6G</a><a href="lte.html">LTE</a><a class="active" href="sip.html">SIP</a><a href="log-analysis.html">Log Analysis</a><a href="../index.html#references">References</a></nav></header>
+<main class="container article-page"><div class="article-layout">
+<aside class="article-nav"><h3>SIP Theory</h3>
+<a href="#internet">1. SIP and the Internet</a>
+<a href="#core">2. Core Concepts</a>
+<a href="#clients">3. Clients and Servers</a>
+<a href="#methods">4. Request Messages</a>
+<a href="#responses">5. Response Messages</a>
+<a href="#headers">6. Header Fields</a>
+<a href="#related">7. Related Protocols</a>
+<a href="#h323">8. SIP vs H.323</a>
+<a href="#wireless">9. Wireless and 3GPP</a>
+</aside>
+<article class="article-content">
+<p class="eyebrow">SESSION INITIATION PROTOCOL</p>
+<h1>SIP — Session Initiation Protocol</h1>
+<p class="lead">A complete theory section covering SIP fundamentals, call flow, messages, servers, methods, response codes, headers, related protocols, H.323 and 3GPP/IMS.</p>
+
+<h2 id="internet">1. SIP and the Internet</h2>
+<p><strong>SIP (Session Initiation Protocol)</strong> is an application-layer <strong>signaling protocol</strong> used to create, modify, and terminate multimedia sessions such as voice, video, instant messaging and gaming between two or more participants over IP networks. SIP was originally defined by <strong>RFC 3261</strong> and standardized through the <strong>IETF</strong>.</p>
+<p>SIP sits at the <strong>application layer</strong> of the Internet protocol stack, above the transport layer. SIP can use <strong>UDP, TCP, TLS and SCTP</strong>, which operate above IP and the physical/link layers.</p>
+<p>SIP relies on supporting protocols and conventions including:</p>
+<ul><li><strong>DNS</strong> — resolves domain names to IP addresses and servers.</li><li><strong>URLs/URIs</strong> — address users using <code>sip:</code> and <code>sips:</code> schemes.</li><li><strong>Multicast</strong> — can be used for some session types.</li><li><strong>ABNF</strong> — defines SIP message syntax.</li></ul>
+<p>SIP borrows heavily from <strong>HTTP</strong>, particularly its text-based request/response model, and from <strong>SMTP</strong> for addressing. This makes SIP human-readable and relatively easy to extend.</p>
+
+<h2 id="core">2. Introduction to SIP — Core Concepts</h2>
+<h3>Basic call flow</h3>
+<p>A simple call is set up between two User Agents with the following messages:</p>
+<ol><li><strong>INVITE</strong> — invites the other party into a session; the body can contain an <strong>SDP</strong> payload describing the desired media, such as audio/video codec, IP address and port.</li><li><strong>180 Ringing</strong> — informational response indicating that the called party is being alerted.</li><li><strong>200 OK</strong> — the called party accepts and can include its own SDP answer.</li><li><strong>ACK</strong> — confirms the final response to the INVITE; the media session can then proceed using RTP.</li><li><strong>BYE</strong> — either party terminates the established session, followed by <strong>200 OK</strong>.</li></ol>
+<h3>Key message anatomy</h3>
+<ul><li><strong>Request line / status line:</strong> a request contains method + Request-URI + SIP version; a response contains SIP version + status code + reason phrase.</li><li><strong>Header fields:</strong> use the <code>Header: Value</code> form. Header lines end in CRLF, and a blank line separates headers from the body.</li><li><strong>Mandatory request headers:</strong> Via, Max-Forwards, To, From, Call-ID and CSeq; Contact is used for INVITE-type dialog-forming requests.</li><li><strong>Via:</strong> records the path a request takes; each hop stamps its own address and the <code>branch</code> parameter acts as a transaction identifier.</li><li><strong>Max-Forwards:</strong> is decremented at each hop and provides loop prevention.</li><li><strong>To / From:</strong> identify the direction of the request and include tags used to identify the dialog. The tuple Call-ID + From-tag + To-tag identifies a dialog.</li><li><strong>Call-ID:</strong> provides a unique identifier for the session/dialog context.</li><li><strong>CSeq:</strong> contains a sequence number and method name and helps distinguish new requests from retransmissions, including re-INVITEs.</li><li><strong>Content-Type / Content-Length:</strong> describe the message body, commonly <code>application/sdp</code>.</li></ul>
+<p>SIP responses are grouped into six classes: <strong>1xx informational, 2xx success, 3xx redirection, 4xx client error, 5xx server error and 6xx global failure</strong>.</p>
+<h3>Other examples</h3>
+<ul><li><strong>Proxy-mediated calls:</strong> proxy servers forward requests/responses and can use a location service to find the callee.</li><li><strong>Registration:</strong> a User Agent tells a registrar its current contact address using <strong>REGISTER</strong>, binding an Address-of-Record (AOR) to a Contact URI.</li><li><strong>Presence and Instant Messaging:</strong> use <strong>SUBSCRIBE/NOTIFY</strong> and <strong>MESSAGE</strong>.</li></ul>
+<h3>Transport</h3>
+<ul><li><strong>UDP</strong> — simple, no guaranteed delivery; SIP provides retransmission mechanisms.</li><li><strong>TCP</strong> — reliable transport and useful for larger SIP messages or when reliability at each hop matters.</li><li><strong>TLS</strong> — encrypted and authenticated transport; used with the <code>sips:</code> scheme.</li><li><strong>SCTP</strong> — alternative transport with multi-streaming, particularly relevant in some telecom-core environments.</li></ul>
+
+<h2 id="clients">3. SIP Clients and Servers</h2>
+<ul><li><strong>User Agent (UA):</strong> an end device capable of establishing sessions. It contains the logical roles <strong>UAC</strong> (initiates requests) and <strong>UAS</strong> (generates responses). Dialog state includes tags, Call-ID, CSeq and route information.</li><li><strong>Presence Agent (PA):</strong> handles SUBSCRIBE/NOTIFY for presence information and can aggregate information from multiple sources.</li><li><strong>Back-to-Back User Agent (B2BUA):</strong> terminates a request as a UAS and re-originates a new request as a UAC. It can be used for anonymization, services and application-layer gateway functions. It changes SIP's end-to-end behavior and introduces additional state.</li><li><strong>SIP Gateway:</strong> interfaces SIP with another signaling system such as H.323, PSTN/ISDN, SS7 or CAS. It may terminate signaling only or both signaling and media.</li></ul>
+<h3>SIP servers</h3>
+<ul><li><strong>Proxy servers:</strong> forward requests on behalf of User Agents. They can be <strong>stateless</strong> or <strong>stateful</strong>.</li><li><strong>Forking proxy:</strong> sends an INVITE to multiple possible destinations and manages the resulting responses.</li><li><strong>SIP Trapezoid:</strong> a model with an outbound proxy, DNS/location lookup, inbound proxy and User Agents at both ends; media can flow directly between the endpoints.</li><li><strong>Redirect server:</strong> returns a 3xx response containing alternate locations rather than forwarding the request itself.</li><li><strong>Registrar:</strong> accepts REGISTER requests and updates AOR/contact bindings in a location database.</li></ul>
+<h3>Reliability, authentication and NAT</h3>
+<ul><li><strong>Reliability:</strong> SIP uses application-layer retransmission mechanisms to compensate for unreliable transports such as UDP; <strong>100 Trying</strong> provides a single-hop indication that processing has begun.</li><li><strong>Authentication:</strong> SIP supports HTTP Digest challenge/response using <strong>401</strong> and <strong>407</strong> responses and authentication headers.</li><li><strong>S/MIME:</strong> can be used to encrypt/sign SIP message bodies.</li><li><strong>Multicast:</strong> supports one-to-many session setup in applicable scenarios.</li><li><strong>NAT/firewalls:</strong> SIP can have traversal problems because IP addresses and ports may appear in Via, Contact and SDP.</li><li><strong>STUN:</strong> lets a User Agent discover its public IP/port.</li><li><strong>TURN:</strong> relays media when direct connectivity fails.</li><li><strong>ICE / ALGs:</strong> are other mechanisms relevant to SIP/SDP NAT traversal.</li></ul>
+
+<h2 id="methods">4. SIP Request Messages</h2>
+<p>Core SIP methods defined by RFC 3261 and extensions include:</p>
+<table><thead><tr><th>Method</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><strong>INVITE</strong></td><td>Initiates a session; can carry an SDP offer.</td></tr>
+<tr><td><strong>REGISTER</strong></td><td>Binds an AOR to a Contact address.</td></tr>
+<tr><td><strong>BYE</strong></td><td>Terminates an established session.</td></tr>
+<tr><td><strong>ACK</strong></td><td>Confirms the final response to INVITE.</td></tr>
+<tr><td><strong>CANCEL</strong></td><td>Cancels a pending request, for example during a forked search.</td></tr>
+<tr><td><strong>OPTIONS</strong></td><td>Queries a User Agent/server for capabilities.</td></tr>
+<tr><td><strong>REFER</strong></td><td>Asks the recipient to contact a third party, such as for call transfer.</td></tr>
+<tr><td><strong>SUBSCRIBE</strong></td><td>Requests notification of an event.</td></tr>
+<tr><td><strong>NOTIFY</strong></td><td>Sends event state information.</td></tr>
+<tr><td><strong>MESSAGE</strong></td><td>Sends instant messaging content.</td></tr>
+<tr><td><strong>INFO</strong></td><td>Carries mid-session signaling information, such as DTMF.</td></tr>
+<tr><td><strong>PRACK</strong></td><td>Acknowledges reliable provisional responses.</td></tr>
+<tr><td><strong>UPDATE</strong></td><td>Updates session parameters before a final response.</td></tr>
+</tbody></table>
+<p><strong>URI schemes:</strong> <code>sip:</code> is used for SIP addressing, <code>sips:</code> for secure SIP using TLS, and <code>tel:</code> for telephone numbers. Tags distinguish dialogs, and message bodies can contain SDP or other MIME content.</p>
+
+<h2 id="responses">5. SIP Response Messages</h2>
+<p>SIP responses are organized into six classes:</p>
+<ul><li><strong>1xx Informational:</strong> 100 Trying, 180 Ringing, 181 Call Is Being Forwarded, 182 Call Queued, 183 Session Progress.</li><li><strong>2xx Success:</strong> 200 OK, 202 Accepted.</li><li><strong>3xx Redirection:</strong> 300 Multiple Choices, 301 Moved Permanently, 302 Moved Temporarily, 305 Use Proxy, 380 Alternative Service.</li><li><strong>4xx Client Error:</strong> 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 405 Method Not Allowed, 407 Proxy Authentication Required, 408 Request Timeout, 486 Busy Here, 487 Request Terminated, 493 Undecipherable, and others.</li><li><strong>5xx Server Error:</strong> 500 Server Internal Error, 501 Not Implemented, 502 Bad Gateway, 503 Service Unavailable, 504 Gateway Timeout.</li><li><strong>6xx Global Failure:</strong> 600 Busy Everywhere, 603 Decline, 604 Does Not Exist Anywhere, 606 Not Acceptable.</li></ul>
+<p>If a User Agent receives an unrecognized response code, it falls back to treating it according to the response class indicated by the first digit.</p>
+
+<h2 id="headers">6. SIP Header Fields</h2>
+<h3>General request/response headers</h3>
+<p>Call-ID, Contact, CSeq, Date, From, To, Via, Record-Route, Route, Supported, Timestamp, User-Agent, Organization, Retry-After and Subject.</p>
+<h3>Request-only headers</h3>
+<p>Accept, Accept-Encoding/Language, Authorization, Max-Forwards, Priority, Privacy, Proxy-Authorization, Refer-To, Referred-By, Replaces, Require, RAck, Session-Expires, Subscription-State, P-Asserted-Identity and P-Preferred-Identity.</p>
+<h3>Response-only headers</h3>
+<p>Proxy-Authenticate, Server, Unsupported, Warning, WWW-Authenticate and RSeq.</p>
+<h3>Message body headers</h3>
+<p>Allow, Content-Encoding, Content-Disposition, Content-Length, Content-Type, Expires and MIME-Version.</p>
+<p><strong>Record-Route / Route:</strong> these mechanisms allow proxies to remain involved in the signaling path for the rest of a dialog, which can be important for routing, policy and other network functions.</p>
+
+<h2 id="related">7. Related Protocols</h2>
+<h3>SDP — Session Description Protocol</h3>
+<p>SDP provides a description syntax for session and media information. It describes items such as IP address, port, media type/encoding, session information and timing. Common SDP fields include:</p>
+<ul><li><code>v=</code> — version</li><li><code>o=</code> — origin/session ID</li><li><code>s=</code> — session name</li><li><code>c=</code> — connection address</li><li><code>t=</code> — timing</li><li><code>m=</code> — media, port, protocol and format</li><li><code>a=</code> — attributes such as <code>rtpmap</code></li></ul>
+<h3>RTP / RTCP</h3>
+<p><strong>RTP</strong> carries the actual media stream. <strong>RTCP</strong> provides control and quality-related feedback. RTP/AVP maps codec numbers used in SDP media descriptions.</p>
+<h3>PSTN interworking</h3>
+<p>Related signaling technologies include <strong>SS7/ISUP</strong>, <strong>CAS</strong> and <strong>SIP-T</strong>, which can be used for PSTN interworking.</p>
+<h3>UPnP</h3>
+<p>UPnP can be relevant to local network device/service discovery and some SIP device/NAT environments.</p>
+
+<h2 id="h323">8. Comparison to H.323</h2>
+<p><strong>H.323</strong> is an ITU-T umbrella recommendation for multimedia communication over packet networks. It includes components such as terminals, gatekeepers, gateways and MCUs.</p>
+<p>A gatekeeper manages a zone and can handle registration, admission, address translation and bandwidth control. H.323 uses mechanisms including <strong>RAS</strong>, <strong>H.225/Q.931</strong> and <strong>H.245</strong>.</p>
+<ul><li><strong>SIP:</strong> text-based and IETF standardized.</li><li><strong>H.323:</strong> binary and based on ASN.1/PER encoding.</li><li>SIP borrows from Internet conventions such as HTTP/SMTP.</li><li>H.323 is more closely associated with traditional telephony concepts such as Q.931 and H.245.</li><li>SIP is generally viewed as simpler, modular and extensible, while H.323 is more complete in some legacy telephony environments but heavier.</li><li>Both can interoperate through gateways.</li></ul>
+
+<h2 id="wireless">9. Wireless and 3GPP</h2>
+<p><strong>3GPP</strong> adopted SIP for <strong>IMS (IP Multimedia Subsystem)</strong> call control.</p>
+<p>Important mobility concepts include:</p>
+<ul><li><strong>Terminal mobility:</strong> the device changes network attachment.</li><li><strong>Personal mobility:</strong> a stable identity such as a SIP URI can be associated with different devices/contacts.</li><li><strong>Service mobility:</strong> services remain consistent across devices.</li></ul>
+<p>SIP's <strong>REGISTER</strong> method supports personal mobility by rebinding an AOR to a new Contact as the device or network attachment changes.</p>
+<p>3GPP/IMS deployments also use SIP extensions and headers such as:</p>
+<ul><li><strong>P-Asserted-Identity</strong></li><li><strong>P-Preferred-Identity</strong></li><li><strong>Service-Route</strong></li><li><strong>Path</strong></li><li>Other P-headers used in IMS for identity assertion and route discovery.</li></ul>
+
+<div class="cta"><div><h3>SIP learning path</h3><p>Use the sections above to move from SIP fundamentals to messages, headers, protocols and 3GPP/IMS concepts.</p></div><a href="../index.html">Back to Knowledge Hub</a></div>
+</article></div></main>
+<footer class="site-footer"><div class="container copyright"><span>© 2026 Nishant Tyagi</span><span><a href="../index.html">Back to Knowledge Hub</a></span></div></footer>
+</body></html>
