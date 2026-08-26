@@ -1,1 +1,6 @@
-const s=document.getElementById('search');const cards=[...document.querySelectorAll('.searchable')];if(s)s.addEventListener('input',()=>{const q=s.value.toLowerCase().trim();cards.forEach(c=>c.style.display=!q||c.dataset.search.includes(q)?'block':'none')});
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll('a[href^="#"]');
+  links.forEach(link => link.addEventListener("click", () => {
+    // Smooth scrolling is handled by CSS; this keeps navigation lightweight.
+  }));
+});

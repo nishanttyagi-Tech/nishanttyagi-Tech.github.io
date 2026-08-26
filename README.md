@@ -1,12 +1,17 @@
-# Nishant Tyagi — Telecom Knowledge Base & Portfolio
+# Nishant Tyagi Telecom Website
 
-A GitHub Pages-ready personal telecom knowledge and portfolio website.
+Updated GitHub Pages-ready site.
 
-## Edit the site
-- Homepage: `index.html`
-- Styles: `css/style.css`
-- Search: `js/app.js`
-- Knowledge articles: `topics/`
-- Projects: `projects/`
+## Main updates
+- Cleaner professional homepage
+- Short expert profile
+- Expanded 5G NR knowledge
+- Network slicing section
+- New 6G / IMT-2030 section
+- Log Analysis Lab kept open for future case studies and updates
+- Standards-first source links: 3GPP, ITU-R, O-RAN Alliance, ETSI and Wireshark
+- Full 6G technical study included under `research/`
 
-The site is designed for GitHub Pages from the repository root on the `main` branch.
+## Deploy
+Upload the contents of this folder to the repository root, preserving folders.
+GitHub Pages should use the `main` branch and `/ (root)` as the publishing source.
