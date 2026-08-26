@@ -1,82 +1,624 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="5G NR — Complete Engineering Guide — practical telecom engineering notes by Nishant Tyagi.">
-<title>Nishant Tyagi | 5G NR — Complete Engineering Guide</title>
+<meta name="description" content="5G NR technical knowledge: architecture, radio, protocols, procedures, 5GC, QoS, mobility, security, planning and troubleshooting.">
+<title>5G / NR | Telecom Knowledge Hub</title>
 <link rel="stylesheet" href="../css/style.css">
+<style>
+.topic-wrap{padding:30px 0 50px}
+.topic-layout{display:grid;grid-template-columns:230px 1fr;gap:20px;align-items:start}
+.topic-nav-box{position:sticky;top:100px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:var(--shadow);max-height:calc(100vh - 120px);overflow:auto}
+.topic-nav-box h3{margin:0 0 10px;color:var(--blue);font-size:15px}
+.topic-nav-box a{display:block;padding:5px 0;border-bottom:1px solid #edf2f7;font-size:11px;color:#275b91}
+.topic-content{background:#fff;border:1px solid var(--line);border-radius:12px;padding:34px 40px;box-shadow:var(--shadow)}
+.topic-content h1{font-size:40px;line-height:1.1;margin:0 0 8px;letter-spacing:-.04em}
+.topic-lead{font-size:16px;color:#48647f;margin:0 0 28px}
+.topic-section{display:grid;grid-template-columns:48px 1fr;gap:16px;padding:24px 0;border-top:1px solid #edf2f7;scroll-margin-top:105px}
+.topic-number{width:40px;height:40px;border-radius:50%;background:#e8f2ff;color:var(--blue);display:grid;place-items:center;font-weight:800;font-size:12px}
+.topic-section h2{margin:0 0 7px;font-size:22px}
+.topic-section p{margin:0;color:#405a73;font-size:14px;line-height:1.75}
+.diagram{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0 12px;padding:12px;border:1px solid #dce7f3;background:#f5f9fd;border-radius:8px;font-size:12px;color:#174e86}
+.diagram span{background:#fff;border:1px solid #b9d2ec;border-radius:6px;padding:7px 9px;font-weight:700}
+.diagram b{color:var(--blue)}
+@media(max-width:900px){.topic-layout{grid-template-columns:1fr}.topic-nav-box{position:static;max-height:none}.topic-content{padding:25px 20px}}
+</style>
 </head><body>
 <header class="site-header"><div class="container topbar">
-<a class="brand" href="../index.html">Nishant Tyagi<small>Telecom Knowledge Hub</small></a>
-<form class="search" onsubmit="return false"><input id="siteSearch" placeholder="Search this topic..." aria-label="Search this topic"><button>⌕</button></form>
-<div class="toplinks"><a href="../about.html">About</a><a href="https://www.linkedin.com/in/nishant-tyagi-5ab70824a/" target="_blank" rel="noopener">LinkedIn</a></div>
-</div>
-<nav class="topic-nav">
-<a href="5g-architecture.html">5G / NR</a><a href="6g.html">6G</a><a href="lte.html">LTE</a><a href="sip.html">SIP</a><a href="log-analysis.html">Log Analysis</a><a href="../index.html#references">References</a>
+<a class="brand" href="../index.html">Telecom Knowledge Hub<small>Nishant Tyagi</small></a>
+<form class="search" onsubmit="return false"><input id="siteSearch" placeholder="Search 5G knowledge..." aria-label="Search 5G knowledge"><button>⌕</button></form>
+<div class="toplinks"><a href="../about.html">About</a><a href="https://www.linkedin.com/in/nishant-tyagi-5ab70824a/" target="_blank">in LinkedIn</a></div>
+</div><nav class="topic-nav">
+<a class="active" href="5g-architecture.html">◉ &nbsp;5G / NR</a><a href="6g.html">◌ &nbsp;6G</a><a href="lte.html">▥ &nbsp;LTE</a><a href="sip.html">▱ &nbsp;SIP</a><a href="log-analysis.html">▧ &nbsp;Log Analysis</a><a href="../index.html#references">⚡ &nbsp;Quick Reference</a>
 </nav></header>
-<main class="container article-page"><div class="article-layout">
-<aside class="article-nav"><h3>5G / NR Topics</h3><a href="#overview">1. 5G NR at a glance</a>
-<a href="#architecture">2. System architecture</a>
-<a href="#deployment">3. SA, NSA and dual connectivity</a>
-<a href="#interfaces">4. Important interfaces</a>
-<a href="#spectrum">5. Spectrum and deployment</a>
-<a href="#numerology">6. Numerology and OFDM</a>
-<a href="#frame">7. Frame, slots and symbols</a>
-<a href="#resource">8. Resource grid and bandwidth parts</a>
-<a href="#channels">9. Physical and logical channels</a>
-<a href="#ssb">10. Synchronization, SSB, PBCH and system information</a>
-<a href="#rach">11. Random access (RACH)</a>
-<a href="#protocols">12. NR protocol stack</a>
-<a href="#rrc">13. RRC states and procedures</a>
-<a href="#mimo">14. MIMO, beamforming, CSI and TCI</a>
-<a href="#mobility">15. Mobility, measurement and handover</a>
-<a href="#qos">16. QoS, 5QI and QoS flows</a>
-<a href="#session">17. Registration and PDU Session</a>
-<a href="#slicing">18. Network slicing</a>
-<a href="#security">19. Security</a>
-<a href="#advanced">20. 5G-Advanced and current evolution</a>
-<a href="#ntn">21. NTN, RedCap, sidelink and positioning</a>
-<a href="#voice">22. IMS voice, VoNR and fallback</a>
-<a href="#troubleshooting">23. Practical troubleshooting workflow</a>
-<a href="#references">24. Standards and study references</a></aside>
-<article class="article-content">
-<p class="eyebrow">5G NEW RADIO</p><h1>5G NR — Complete Engineering Guide</h1><p class="lead">A deep practical guide to 5G NR architecture, radio procedures, protocol layers, 5GC, QoS, mobility, security and modern 5G evolution.</p>
-<section id="overview"><h2>1. 5G NR at a glance</h2><p>5G New Radio (NR) is the radio access technology of 5G. It is designed for flexible spectrum use, scalable numerology, beam-centric operation, massive MIMO, low latency, high capacity and a service-based 5G Core.</p>
-<p>The engineering model is best understood as two connected domains: <b>NG-RAN</b> (UE + gNB) and the <b>5G Core (5GC)</b>. NR handles radio connectivity; the core handles registration, mobility, authentication, sessions, policy, charging and user-plane routing.</p></section><section id="architecture"><h2>2. System architecture</h2>
-<div style="overflow:auto;margin:18px 0">
-<svg viewBox="0 0 900 250" role="img" aria-label="5G standalone architecture diagram" style="width:100%;min-width:650px;background:#f5f9fd;border:1px solid #dce7f3;border-radius:10px">
-<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#0b63ce"/></marker></defs>
-<rect x="35" y="90" width="150" height="70" rx="10" fill="#fff" stroke="#a9c9ef"/><text x="110" y="120" text-anchor="middle" font-size="18" font-weight="700">UE</text><text x="110" y="143" text-anchor="middle" font-size="12">NR radio</text>
-<rect x="270" y="55" width="170" height="140" rx="10" fill="#fff" stroke="#a9c9ef"/><text x="355" y="88" text-anchor="middle" font-size="18" font-weight="700">gNB</text><text x="355" y="112" text-anchor="middle" font-size="12">RU / DU / CU</text><text x="355" y="134" text-anchor="middle" font-size="12">RRC · PDCP · RLC</text><text x="355" y="156" text-anchor="middle" font-size="12">MAC · PHY</text>
-<rect x="520" y="30" width="150" height="60" rx="10" fill="#fff" stroke="#a9c9ef"/><text x="595" y="66" text-anchor="middle" font-size="16" font-weight="700">AMF / SMF</text>
-<rect x="520" y="105" width="150" height="60" rx="10" fill="#fff" stroke="#a9c9ef"/><text x="595" y="141" text-anchor="middle" font-size="16" font-weight="700">UPF</text>
-<rect x="740" y="75" width="120" height="70" rx="10" fill="#fff" stroke="#a9c9ef"/><text x="800" y="107" text-anchor="middle" font-size="16" font-weight="700">Data</text><text x="800" y="129" text-anchor="middle" font-size="12">DN / Internet</text>
-<line x1="185" y1="125" x2="270" y2="125" stroke="#0b63ce" stroke-width="3" marker-end="url(#a)"/><text x="228" y="114" text-anchor="middle" font-size="12">Uu</text>
-<line x1="440" y1="100" x2="520" y2="60" stroke="#0b63ce" stroke-width="3" marker-end="url(#a)"/><text x="480" y="70" text-anchor="middle" font-size="12">NG-C</text>
-<line x1="440" y1="150" x2="520" y2="135" stroke="#0b63ce" stroke-width="3" marker-end="url(#a)"/><text x="480" y="158" text-anchor="middle" font-size="12">NG-U</text>
-<line x1="670" y1="135" x2="740" y2="110" stroke="#0b63ce" stroke-width="3" marker-end="url(#a)"/><text x="705" y="108" text-anchor="middle" font-size="12">N6</text>
-</svg></div><p><b>UE</b> connects to the <b>gNB</b> over Uu. The gNB connects to the 5GC through <b>NG-C</b> (control plane) and <b>NG-U</b> (user plane). In a typical split gNB, the RU handles RF/low-PHY work, the DU handles lower-layer processing, MAC and RLC, and the CU handles higher layers such as PDCP/SDAP/RRC.</p>
-<ul><li>5GC functions: AMF, SMF, UPF, AUSF, UDM, PCF, NRF, NSSF and related functions.</li><li>Control plane: NAS + RRC + NGAP.</li><li>User plane: SDAP + PDCP + RLC + MAC + PHY.</li></ul></section><section id="deployment"><h2>3. SA, NSA and dual connectivity</h2><p><b>Standalone (SA)</b> uses NR with the 5GC. <b>Non-Standalone (NSA)</b> combines LTE/EPC or LTE/NR dual-connectivity arrangements while operators transition to SA. Important concepts include master/secondary nodes, master/secondary cell groups, split bearers, EN-DC, NE-DC and other MR-DC configurations.</p>
-<p>Do not confuse the radio generation with the core generation: a network may provide an NR radio while still relying on LTE/EPC-era architecture in an NSA deployment.</p></section><section id="interfaces"><h2>4. Important interfaces</h2><ul><li><b>Uu:</b> UE ↔ gNB radio interface.</li><li><b>NG-C / N2:</b> gNB ↔ AMF control plane.</li><li><b>NG-U / N3:</b> gNB ↔ UPF user plane.</li><li><b>Xn:</b> gNB ↔ gNB/NG-RAN node coordination, including mobility.</li><li><b>N1:</b> UE ↔ AMF NAS signalling.</li><li><b>N2:</b> RAN ↔ AMF.</li><li><b>N3:</b> RAN ↔ UPF.</li><li><b>N4:</b> SMF ↔ UPF.</li><li><b>N6:</b> UPF ↔ Data Network.</li><li><b>Nxx/SBI:</b> service-based interactions among 5GC network functions.</li></ul></section><section id="spectrum"><h2>5. Spectrum and deployment</h2><p>NR spans low-band coverage, mid-band capacity and mmWave high-capacity deployments. 3GPP commonly groups operation into <b>FR1</b> and <b>FR2</b>. Lower frequencies provide better coverage and penetration; higher frequencies offer more bandwidth but require tighter beam management and generally face higher propagation loss.</p>
-<p>Engineering decisions include channel bandwidth, TDD pattern, carrier aggregation, supplementary downlink, beamforming, power limits and coexistence constraints.</p></section><section id="numerology"><h2>6. Numerology and OFDM</h2><p>NR scales subcarrier spacing (SCS) as 15 × 2<sup>μ</sup> kHz. Common values are 15, 30, 60, 120 and, for specific high-frequency/synchronization cases, 240 kHz. Increasing SCS shortens OFDM symbols and slots, reducing latency but reducing tolerance to delay spread and generally reducing coverage suitability.</p>
-<p>Normal cyclic prefix is used for most deployments. The uplink can use CP-OFDM and, where configured, DFT-s-OFDM for coverage/PA-efficiency benefits. Modulation includes QPSK, 16QAM, 64QAM and 256QAM, with additional capability-dependent options in later releases.</p></section><section id="frame"><h2>7. Frame, slots and symbols</h2><p>A radio frame is 10 ms. A subframe is 1 ms. The number of slots per subframe scales with numerology. A normal slot contains 14 OFDM symbols; mini-slot transmissions can use fewer symbols and are useful for low-latency scheduling and pre-emption-oriented behavior.</p>
-<p>NR's flexible slot structure allows DL/UL direction patterns to be configured for TDD, rather than tying every service to a rigid LTE-style timing model.</p></section><section id="resource"><h2>8. Resource grid and bandwidth parts</h2><p>The NR resource grid is organized in <b>resource blocks</b>, subcarriers and OFDM symbols. A physical resource block contains 12 consecutive subcarriers for a given numerology. A resource element is one subcarrier in one OFDM symbol.</p>
-<p><b>Bandwidth Parts (BWPs)</b> let a UE operate on a smaller active bandwidth inside a wider carrier. This reduces UE power/processing requirements and enables flexible adaptation. A UE can have configured DL and UL BWPs, with one active BWP at a time in the normal case.</p></section><section id="channels"><h2>9. Physical and logical channels</h2><ul><li><b>PDSCH:</b> downlink shared data.</li><li><b>PUSCH:</b> uplink shared data.</li><li><b>PDCCH:</b> downlink control/DCI.</li><li><b>PUCCH:</b> uplink control such as HARQ-ACK, SR and CSI.</li><li><b>PRACH:</b> random-access preambles.</li><li><b>PBCH:</b> broadcast channel carrying the MIB.</li><li>Logical channels include BCCH, PCCH, CCCH, DCCH and DTCH.</li><li>Transport channels include BCH, DL-SCH, UL-SCH and PCH.</li></ul></section><section id="ssb"><h2>10. Synchronization, SSB, PBCH and system information</h2><p>The <b>SS/PBCH block (SSB)</b> combines PSS, SSS and PBCH/DM-RS. The UE uses it for synchronization, cell identification, beam selection and acquisition of the MIB. In FR2 and beam-centric deployments, multiple SSBs can represent different beams.</p>
-<p><b>SIB1</b> provides remaining minimum system information needed for cell access and scheduling of other system information. The UE normally uses the MIB/SIB1 chain before attempting normal access.</p></section><section id="rach"><h2>11. Random access (RACH)</h2><p>Random access establishes uplink timing and helps the UE obtain resources to continue access. The classic contention-based procedure is a four-step sequence: <b>Msg1 PRACH preamble → Msg2 RAR → Msg3 scheduled transmission → Msg4 contention resolution</b>. Contention-free access can be configured for cases such as handover.</p>
-<p>Beam association matters in NR: PRACH occasions/preambles can be linked with SSBs so that access targets an appropriate beam.</p></section><section id="protocols"><h2>12. NR protocol stack</h2><ul><li><b>PHY:</b> modulation, coding, MIMO, reference signals, synchronization and radio procedures.</li><li><b>MAC:</b> scheduling, HARQ, logical-channel multiplexing and random access control.</li><li><b>RLC:</b> segmentation/reassembly and retransmission in AM mode.</li><li><b>PDCP:</b> ciphering/integrity, header compression and packet handling.</li><li><b>SDAP:</b> maps 5GC QoS flows to data radio bearers.</li><li><b>RRC:</b> connection, measurement, mobility and radio configuration control.</li><li><b>NAS:</b> UE ↔ core registration, authentication and session management.</li></ul></section><section id="rrc"><h2>13. RRC states and procedures</h2><p>Key RRC states are <b>RRC_IDLE</b>, <b>RRC_INACTIVE</b> and <b>RRC_CONNECTED</b>. RRC controls configuration, measurements, mobility, security activation, bearer setup and release.</p>
-<p>Typical connection establishment is: cell selection → system information → random access → RRC Setup → RRC Setup Complete (with NAS) → security/configuration → connected data transfer. RRC Inactive reduces signalling and resume latency for suitable traffic patterns.</p></section><section id="mimo"><h2>14. MIMO, beamforming, CSI and TCI</h2><p>Massive MIMO and beamforming are central to NR, especially at higher frequencies. The network uses reference signals such as CSI-RS and SSBs to support channel estimation, beam measurement and CSI feedback.</p>
-<p><b>QCL</b> relationships allow the UE to infer common spatial/delay characteristics between signals. <b>TCI states</b> can associate PDCCH/PDSCH reception with appropriate reference-signal spatial parameters. Beam failure detection and recovery become important as frequency increases.</p></section><section id="mobility"><h2>15. Mobility, measurement and handover</h2><p>UE measurements can include SS-RSRP, SS-RSRQ and SS-SINR. Measurement events and configured thresholds help the network decide when to move the UE. NR handover can use Xn or core-assisted paths depending on architecture.</p>
-<p>Beam-level measurements may influence cell-level mobility. Contention-free random access can make the target-cell access step faster and more reliable when dedicated resources are available.</p></section><section id="qos"><h2>16. QoS, 5QI and QoS flows</h2><p>5G replaces the LTE bearer-centric view with a <b>QoS Flow</b> model in the 5GC. A QoS Flow is identified by a <b>QFI</b>. The standardized <b>5QI</b> conveys QoS characteristics such as priority, packet delay budget and packet error characteristics.</p>
-<p>SDAP maps QoS flows to Data Radio Bearers. The network can apply different treatment to conversational voice, video, interactive data, industrial traffic and ordinary best-effort traffic.</p></section><section id="session"><h2>17. Registration and PDU Session</h2><p><b>Registration</b> establishes the UE's relationship with the 5GC and includes identity, authentication/security and mobility-registration handling. <b>PDU Session Establishment</b> creates user-plane connectivity toward a Data Network through an SMF-selected UPF.</p>
-<p>The PDU Session procedure carries parameters such as DNN, S-NSSAI, PDU Session Type, SSC mode and UE 5GSM capabilities. NAS session-management messages are transported through RRC and NGAP toward the core.</p></section><section id="slicing"><h2>18. Network slicing</h2><p>A <b>network slice</b> is a logical network instance tailored to a service or tenant. The UE requests slice assistance information using <b>S-NSSAI</b>. The AMF uses slice information to select appropriate network functions, while the SMF/UPF provide the session and user-plane realization.</p>
-<p>Slice engineering includes isolation, admission, QoS, policy, observability and lifecycle management. A PDU Session is associated with a network slice.</p></section><section id="security"><h2>19. Security</h2><p>5G security separates access-stratum and NAS protection, supports mutual authentication through the 5G-AKA or EAP-based mechanisms, and uses integrity/ciphering algorithms negotiated from UE/network capabilities. Security context establishment is coordinated across NAS and RRC.</p>
-<p>Important engineering checks include authentication failures, security-mode failures, unsupported algorithms, identity handling, replay protection, integrity errors and transitions between mobility/security contexts.</p></section><section id="advanced"><h2>20. 5G-Advanced and current evolution</h2><p>5G did not stop at Release 15. Later releases extend AI/ML support, XR/immersive services, RedCap, sidelink, positioning, NTN, energy saving, mobility enhancements and other radio/core capabilities. Release 19 is a major 5G-Advanced phase while 3GPP work continues to evolve the system.</p>
-<p>For a current engineering view, separate <b>normative features</b> from study items and vendor-specific extensions. Do not label a research feature as a finalized 3GPP requirement.</p></section><section id="ntn"><h2>21. NTN, RedCap, sidelink and positioning</h2><ul><li><b>NTN:</b> extends 5G services through satellite/non-terrestrial platforms and introduces long-delay, Doppler and coverage-specific considerations.</li><li><b>RedCap:</b> reduces device complexity and capability for mid-tier IoT/wearable use cases.</li><li><b>Sidelink:</b> enables UE-to-UE communication for direct communication and specialized services.</li><li><b>Positioning:</b> combines radio measurements and reference signals to estimate location, with accuracy and latency depending on method and deployment.</li></ul></section><section id="voice"><h2>22. IMS voice, VoNR and fallback</h2><p>Voice in 5G is normally delivered through IMS using SIP. <b>VoNR</b> keeps the voice session on NR when coverage and QoS support it. During early deployments, <b>EPS fallback</b> can move a voice setup from NR/5GC toward LTE/EPC; other fallback/RAT procedures depend on release and network architecture.</p>
-<p>The SIP signalling domain and the NR radio domain should be debugged separately and then correlated: a SIP failure is not automatically an NR failure, and an NR QoS failure may prevent voice even when SIP signalling is correct.</p></section><section id="troubleshooting"><h2>23. Practical troubleshooting workflow</h2><ol><li>Check serving cell, SSB/beam and radio quality.</li><li>Verify MIB/SIB1 and cell-access eligibility.</li><li>Check PRACH/RAR and RRC establishment.</li><li>Trace NAS Registration and authentication.</li><li>Trace PDU Session Establishment and SMF/UPF selection.</li><li>Verify QoS Flow/QFI/5QI and DRB mapping.</li><li>Check PDCP/RLC/MAC retransmissions, HARQ and scheduling.</li><li>For mobility, correlate measurements, RRC handover messages and target-cell RACH.</li><li>For voice, correlate SIP/IMS with QoS and fallback signalling.</li></ol></section><section id="references"><h2>24. Standards and study references</h2><p>Primary engineering references include 3GPP TS 23.501 (5GS architecture), TS 23.502 (5GS procedures), TS 38.300 (NR/NG-RAN overall description), TS 38.211/212/213/214 (NR physical layer), TS 38.331 (RRC), TS 38.413 (NGAP), TS 24.501 (5G NAS), and related 3GPP specifications.</p>
-<p>This page is a practical learning summary; the normative specification remains the authority for exact requirements and release-specific behavior.</p></section>
+<main class="container topic-wrap"><div class="topic-layout">
+<aside class="topic-nav-box"><h3>5G / NR — All Topics</h3><a href="#s1">5G / NR Fundamentals</a>
+<a href="#s2">5G Architecture</a>
+<a href="#s3">UE</a>
+<a href="#s4">NG-RAN</a>
+<a href="#s5">gNB Architecture</a>
+<a href="#s6">5G Core Network</a>
+<a href="#s7">AMF / SMF / UPF</a>
+<a href="#s8">Other 5GC Functions</a>
+<a href="#s9">Interfaces</a>
+<a href="#s10">Protocol Stack</a>
+<a href="#s11">Standalone and Non-Standalone</a>
+<a href="#s12">Multi-Connectivity</a>
+<a href="#s13">Spectrum and Frequency Ranges</a>
+<a href="#s14">NR-ARFCN and GSCN</a>
+<a href="#s15">Numerology</a>
+<a href="#s16">Frame and Slot Structure</a>
+<a href="#s17">Resource Grid</a>
+<a href="#s18">Bandwidth Parts</a>
+<a href="#s19">Synchronization</a>
+<a href="#s20">SSB / PSS / SSS / PBCH</a>
+<a href="#s21">System Information</a>
+<a href="#s22">Downlink Channels</a>
+<a href="#s23">Uplink Channels</a>
+<a href="#s24">Reference Signals</a>
+<a href="#s25">MIMO</a>
+<a href="#s26">Beamforming and Beam Management</a>
+<a href="#s27">CSI</a>
+<a href="#s28">Modulation and Coding</a>
+<a href="#s29">MAC</a>
+<a href="#s30">RLC</a>
+<a href="#s31">PDCP</a>
+<a href="#s32">SDAP</a>
+<a href="#s33">SR / BSR / PHR</a>
+<a href="#s34">HARQ</a>
+<a href="#s35">Random Access / PRACH</a>
+<a href="#s36">RRC States</a>
+<a href="#s37">RRC Signalling Radio Bearers</a>
+<a href="#s38">RRC Connection Establishment</a>
+<a href="#s39">Registration</a>
+<a href="#s40">Authentication and Security</a>
+<a href="#s41">PDU Session</a>
+<a href="#s42">PDU Session Establishment</a>
+<a href="#s43">QoS and 5QI</a>
+<a href="#s44">Network Slicing</a>
+<a href="#s45">Mobility and Cell Reselection</a>
+<a href="#s46">Handover</a>
+<a href="#s47">VoNR</a>
+<a href="#s48">EPS Fallback</a>
+<a href="#s49">RAT Fallback</a>
+<a href="#s50">NSA Mobility and EN-DC</a>
+<a href="#s51">Network Planning</a>
+<a href="#s52">PCI Planning</a>
+<a href="#s53">PRACH Planning</a>
+<a href="#s54">Dynamic Spectrum Sharing</a>
+<a href="#s55">Measurements and KPIs</a>
+<a href="#s56">Testing and Troubleshooting</a>
+<a href="#s57">Random Access Troubleshooting</a>
+<a href="#s58">Registration Troubleshooting</a>
+<a href="#s59">PDU Session Troubleshooting</a>
+<a href="#s60">Mobility Troubleshooting</a>
+<a href="#s61">Voice Troubleshooting</a>
+<a href="#s62">5G-Advanced / Release 18</a>
+<a href="#s63">5G-Advanced / Release 19 Evolution</a>
+<a href="#s64">Practical Engineer&#x27;s Checklist</a></aside>
+<article class="topic-content">
+<p class="eyebrow">5G / NEW RADIO</p><h1>5G / NR Complete Engineering Guide</h1>
+<p class="topic-lead">A structured technical reference covering the radio interface, NG-RAN, 5G Core, signalling, procedures, QoS, slicing, mobility, voice, planning, troubleshooting and 5G-Advanced evolution.</p>
+
+<section id="s1" class="topic-section">
+  <div class="topic-number">01</div>
+  <div>
+    <h2>5G / NR Fundamentals</h2>
+    
+    <p>5G combines a flexible radio interface (NR) with a service-based 5G Core. The design targets enhanced mobile broadband, ultra-reliable low-latency services, massive machine communication, industrial connectivity and flexible deployment.</p>
+  </div>
+</section>
+<section id="s2" class="topic-section">
+  <div class="topic-number">02</div>
+  <div>
+    <h2>5G Architecture</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>The end-to-end model is UE → NR/NG-RAN → 5GC → Data Network. SA uses NR with 5GC; NSA uses NR together with LTE/EPC or other migration architectures. The RAN provides radio access while the core provides registration, authentication, mobility, session management, policy and user-plane connectivity.</p>
+  </div>
+</section>
+<section id="s3" class="topic-section">
+  <div class="topic-number">03</div>
+  <div>
+    <h2>UE</h2>
+    
+    <p>The UE contains RF, modem/PHY, MAC, RLC, PDCP, SDAP and RRC functions plus NAS procedures toward the core. Capability signalling tells the network which bands, bandwidths, MIMO layers, features and voice capabilities are supported.</p>
+  </div>
+</section>
+<section id="s4" class="topic-section">
+  <div class="topic-number">04</div>
+  <div>
+    <h2>NG-RAN</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>NG-RAN is built from gNBs and, where applicable, ng-eNBs. gNBs connect to the 5GC over NG and to neighbouring RAN nodes over Xn. A gNB may be centralized or split into CU and DU.</p>
+  </div>
+</section>
+<section id="s5" class="topic-section">
+  <div class="topic-number">05</div>
+  <div>
+    <h2>gNB Architecture</h2>
+    
+    <p>A split gNB commonly contains CU-CP, CU-UP and DU. F1 connects CU and DU; E1 connects CU-CP and CU-UP. This separation allows centralized control/user-plane functions and distributed real-time radio processing.</p>
+  </div>
+</section>
+<section id="s6" class="topic-section">
+  <div class="topic-number">06</div>
+  <div>
+    <h2>5G Core Network</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>The principal functions are AMF, SMF, UPF, AUSF, UDM, PCF, NRF, NSSF and NEF. The architecture uses service-based interfaces between control-plane network functions and separate user-plane forwarding.</p>
+  </div>
+</section>
+<section id="s7" class="topic-section">
+  <div class="topic-number">07</div>
+  <div>
+    <h2>AMF / SMF / UPF</h2>
+    
+    <p>AMF handles access and mobility; SMF controls PDU sessions and UPF selection; UPF forwards user traffic and anchors traffic toward external data networks. Keeping control and forwarding separate enables distributed UPF deployment.</p>
+  </div>
+</section>
+<section id="s8" class="topic-section">
+  <div class="topic-number">08</div>
+  <div>
+    <h2>Other 5GC Functions</h2>
+    
+    <p>AUSF supports authentication, UDM stores subscription-related data, PCF provides policy, NRF provides NF discovery, NSSF assists slice selection, and NEF exposes controlled network capabilities.</p>
+  </div>
+</section>
+<section id="s9" class="topic-section">
+  <div class="topic-number">09</div>
+  <div>
+    <h2>Interfaces</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>Important interfaces include Uu, NG/N2/N3, Xn, F1, E1, N1, N2, N3, N4 and N6. NG-C uses NGAP over SCTP/IP; NG-U uses GTP-U over UDP/IP. Xn supports RAN coordination and mobility.</p>
+  </div>
+</section>
+<section id="s10" class="topic-section">
+  <div class="topic-number">10</div>
+  <div>
+    <h2>Protocol Stack</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>The radio stack includes RRC, PDCP, RLC, MAC and PHY; SDAP maps QoS flows to data radio bearers. NAS operates between UE and core functions. NGAP carries control signalling between NG-RAN and AMF.</p>
+  </div>
+</section>
+<section id="s11" class="topic-section">
+  <div class="topic-number">11</div>
+  <div>
+    <h2>Standalone and Non-Standalone</h2>
+    
+    <p>SA uses NR plus 5GC. NSA allows NR to be introduced while LTE/EPC or migration architectures remain part of the service path. EN-DC uses LTE as master and NR as secondary; MCG, SCG and split bearers are important concepts.</p>
+  </div>
+</section>
+<section id="s12" class="topic-section">
+  <div class="topic-number">12</div>
+  <div>
+    <h2>Multi-Connectivity</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>Multi-connectivity can combine master and secondary nodes. Bearer choices include MCG bearer, SCG bearer and split bearer, allowing traffic to use LTE, NR or both depending on configuration.</p>
+  </div>
+</section>
+<section id="s13" class="topic-section">
+  <div class="topic-number">13</div>
+  <div>
+    <h2>Spectrum and Frequency Ranges</h2>
+    
+    <p>NR supports Frequency Range 1 and Frequency Range 2. Deployment choices affect propagation, coverage, bandwidth, beam management, antenna design and achievable throughput.</p>
+  </div>
+</section>
+<section id="s14" class="topic-section">
+  <div class="topic-number">14</div>
+  <div>
+    <h2>NR-ARFCN and GSCN</h2>
+    
+    <p>NR-ARFCN identifies carrier frequency using the NR raster. GSCN identifies synchronization raster positions used when locating SS/PBCH blocks.</p>
+  </div>
+</section>
+<section id="s15" class="topic-section">
+  <div class="topic-number">15</div>
+  <div>
+    <h2>Numerology</h2>
+    
+    <p>NR scales OFDM subcarrier spacing using μ, with Δf = 15 kHz × 2^μ. Higher numerology shortens symbol and slot duration and is useful where shorter transmission intervals are required.</p>
+  </div>
+</section>
+<section id="s16" class="topic-section">
+  <div class="topic-number">16</div>
+  <div>
+    <h2>Frame and Slot Structure</h2>
+    
+    <p>A radio frame is 10 ms. Slot duration depends on numerology. A normal-CP slot contains 14 OFDM symbols. Flexible slot formats support DL, UL and special/flexible symbol allocation.</p>
+  </div>
+</section>
+<section id="s17" class="topic-section">
+  <div class="topic-number">17</div>
+  <div>
+    <h2>Resource Grid</h2>
+    
+    <p>The basic time-frequency unit is the Resource Element. Twelve consecutive subcarriers form a Resource Block. Bandwidth Parts allow a UE to operate on a configured subset of the carrier resource grid.</p>
+  </div>
+</section>
+<section id="s18" class="topic-section">
+  <div class="topic-number">18</div>
+  <div>
+    <h2>Bandwidth Parts</h2>
+    
+    <p>BWP can reduce UE active bandwidth and support different operational configurations. A UE may have configured DL and UL BWPs and can switch between them using control signalling.</p>
+  </div>
+</section>
+<section id="s19" class="topic-section">
+  <div class="topic-number">19</div>
+  <div>
+    <h2>Synchronization</h2>
+    
+    <p>The UE detects SS/PBCH blocks to obtain synchronization and identify the serving cell. PSS and SSS support synchronization/cell identity acquisition; PBCH carries essential broadcast information.</p>
+  </div>
+</section>
+<section id="s20" class="topic-section">
+  <div class="topic-number">20</div>
+  <div>
+    <h2>SSB / PSS / SSS / PBCH</h2>
+    
+    <p>An SS/PBCH block contains PSS, SSS and PBCH. Multiple SSBs can represent different beams. The UE uses SSB measurements for synchronization and beam/cell selection.</p>
+  </div>
+</section>
+<section id="s21" class="topic-section">
+  <div class="topic-number">21</div>
+  <div>
+    <h2>System Information</h2>
+    
+    <p>MIB is carried through PBCH and provides essential physical-layer/system information. SIBs provide additional configuration such as cell access, serving-cell configuration and common radio parameters.</p>
+  </div>
+</section>
+<section id="s22" class="topic-section">
+  <div class="topic-number">22</div>
+  <div>
+    <h2>Downlink Channels</h2>
+    
+    <p>PDCCH carries downlink control information, while PDSCH carries downlink shared data. Scheduling decisions determine time-frequency resources, modulation/coding and HARQ processes.</p>
+  </div>
+</section>
+<section id="s23" class="topic-section">
+  <div class="topic-number">23</div>
+  <div>
+    <h2>Uplink Channels</h2>
+    
+    <p>PRACH provides random access, PUCCH carries uplink control information, PUSCH carries uplink shared data, and SRS supports uplink channel sounding and related measurements.</p>
+  </div>
+</section>
+<section id="s24" class="topic-section">
+  <div class="topic-number">24</div>
+  <div>
+    <h2>Reference Signals</h2>
+    
+    <p>NR uses DM-RS, CSI-RS, PT-RS and SRS for demodulation, channel measurement, phase tracking and uplink channel sounding. Their placement and purpose differ by channel and procedure.</p>
+  </div>
+</section>
+<section id="s25" class="topic-section">
+  <div class="topic-number">25</div>
+  <div>
+    <h2>MIMO</h2>
+    
+    <p>MIMO uses multiple antenna ports/layers to improve throughput, robustness or coverage. Rank, precoding, codebooks and channel-state information influence the selected transmission.</p>
+  </div>
+</section>
+<section id="s26" class="topic-section">
+  <div class="topic-number">26</div>
+  <div>
+    <h2>Beamforming and Beam Management</h2>
+    
+    <p>Massive-MIMO systems form directional beams. Beam sweeping, measurement, reporting, selection, refinement and recovery maintain a suitable serving beam, especially at higher frequencies.</p>
+  </div>
+</section>
+<section id="s27" class="topic-section">
+  <div class="topic-number">27</div>
+  <div>
+    <h2>CSI</h2>
+    
+    <p>Channel State Information includes measurements and feedback used for scheduling and MIMO. CSI reporting can include CQI, PMI and RI, depending on configuration.</p>
+  </div>
+</section>
+<section id="s28" class="topic-section">
+  <div class="topic-number">28</div>
+  <div>
+    <h2>Modulation and Coding</h2>
+    
+    <p>NR supports QPSK, 16QAM, 64QAM and higher-order modulation depending on configuration and capability. LDPC is used for shared-channel data coding; Polar coding is used for relevant control/broadcast information.</p>
+  </div>
+</section>
+<section id="s29" class="topic-section">
+  <div class="topic-number">29</div>
+  <div>
+    <h2>MAC</h2>
+    
+    <p>MAC performs multiplexing, logical-channel prioritization, scheduling-related control, HARQ operation, random access control and MAC control elements such as BSR and PHR.</p>
+  </div>
+</section>
+<section id="s30" class="topic-section">
+  <div class="topic-number">30</div>
+  <div>
+    <h2>RLC</h2>
+    
+    <p>RLC provides transparent, unacknowledged and acknowledged modes. Functions include segmentation/reassembly, retransmission in AM, sequence handling and reordering as applicable.</p>
+  </div>
+</section>
+<section id="s31" class="topic-section">
+  <div class="topic-number">31</div>
+  <div>
+    <h2>PDCP</h2>
+    
+    <p>PDCP provides sequence handling, reordering, duplication-related functions, header compression where configured, ciphering and integrity protection for applicable traffic.</p>
+  </div>
+</section>
+<section id="s32" class="topic-section">
+  <div class="topic-number">32</div>
+  <div>
+    <h2>SDAP</h2>
+    
+    <p>SDAP maps 5G QoS flows to data radio bearers and can mark QoS-flow identity in the user plane. This creates the hierarchy PDU Session → QoS Flow → DRB.</p>
+  </div>
+</section>
+<section id="s33" class="topic-section">
+  <div class="topic-number">33</div>
+  <div>
+    <h2>SR / BSR / PHR</h2>
+    
+    <p>Scheduling Request tells the gNB that uplink resources are needed. Buffer Status Report describes queued uplink data. Power Headroom Report indicates remaining transmit-power margin.</p>
+  </div>
+</section>
+<section id="s34" class="topic-section">
+  <div class="topic-number">34</div>
+  <div>
+    <h2>HARQ</h2>
+    
+    <p>Hybrid ARQ combines forward-error correction with retransmission. NR supports multiple parallel HARQ processes so new transmissions can continue while earlier data awaits acknowledgement.</p>
+  </div>
+</section>
+<section id="s35" class="topic-section">
+  <div class="topic-number">35</div>
+  <div>
+    <h2>Random Access / PRACH</h2>
+    
+    <p>Random access establishes uplink timing and initial access. The contention-based procedure is commonly described as Msg1 PRACH preamble, Msg2 Random Access Response, Msg3 transmission and contention resolution.</p>
+  </div>
+</section>
+<section id="s36" class="topic-section">
+  <div class="topic-number">36</div>
+  <div>
+    <h2>RRC States</h2>
+    
+    <p>NR uses RRC_IDLE, RRC_INACTIVE and RRC_CONNECTED. Inactive enables efficient suspension/resumption while retaining useful UE context and reducing signalling compared with a complete reconnect.</p>
+  </div>
+</section>
+<section id="s37" class="topic-section">
+  <div class="topic-number">37</div>
+  <div>
+    <h2>RRC Signalling Radio Bearers</h2>
+    
+    <p>SRB0 supports initial RRC common signalling, SRB1 supports dedicated RRC signalling and initial NAS transfer, SRB2 carries dedicated NAS signalling after security activation, and SRB3 can support specific secondary-node signalling scenarios.</p>
+  </div>
+</section>
+<section id="s38" class="topic-section">
+  <div class="topic-number">38</div>
+  <div>
+    <h2>RRC Connection Establishment</h2>
+    
+    <p>A simplified flow is RRCSetupRequest → RRCSetup → RRCSetupComplete. NAS registration information may be carried through the RRC signalling path toward the AMF.</p>
+  </div>
+</section>
+<section id="s39" class="topic-section">
+  <div class="topic-number">39</div>
+  <div>
+    <h2>Registration</h2>
+    
+    <p>5G registration includes registration request, identity handling where needed, authentication, NAS security, registration acceptance and completion. The UE may identify itself with a concealed identity such as SUCI.</p>
+  </div>
+</section>
+<section id="s40" class="topic-section">
+  <div class="topic-number">40</div>
+  <div>
+    <h2>Authentication and Security</h2>
+    
+    <p>5G security includes primary authentication, NAS security, access-stratum security, integrity protection and ciphering. SUPI is the permanent subscription identity, SUCI conceals it over the radio, and 5G-GUTI provides a temporary identity.</p>
+  </div>
+</section>
+<section id="s41" class="topic-section">
+  <div class="topic-number">41</div>
+  <div>
+    <h2>PDU Session</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>A PDU Session provides connectivity between UE and a DNN through the 5GC. It can carry multiple QoS flows and can support IPv4, IPv6, IPv4v6, Ethernet or unstructured traffic depending on configuration.</p>
+  </div>
+</section>
+<section id="s42" class="topic-section">
+  <div class="topic-number">42</div>
+  <div>
+    <h2>PDU Session Establishment</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>The UE requests a PDU Session; AMF transfers session-management signalling toward SMF; SMF selects/configures UPF and policy; the RAN receives resource configuration; the UE receives the PDU Session Establishment Accept.</p>
+  </div>
+</section>
+<section id="s43" class="topic-section">
+  <div class="topic-number">43</div>
+  <div>
+    <h2>QoS and 5QI</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>A QoS Flow is the finest QoS granularity in the 5G user plane. 5QI identifies standardized or operator-specific QoS characteristics. QoS flows are mapped to DRBs by SDAP and ultimately to transport tunnels.</p>
+  </div>
+</section>
+<section id="s44" class="topic-section">
+  <div class="topic-number">44</div>
+  <div>
+    <h2>Network Slicing</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>A network slice is a logical network tailored to a service requirement. S-NSSAI identifies slice information using SST and optional SD. Slice selection involves UE subscription, AMF/NSSF logic and the availability of suitable network functions.</p>
+  </div>
+</section>
+<section id="s45" class="topic-section">
+  <div class="topic-number">45</div>
+  <div>
+    <h2>Mobility and Cell Reselection</h2>
+    
+    <p>Mobility includes intra-frequency, inter-frequency and inter-RAT cases. Connected-mode mobility relies on measurements and RRC procedures; idle/inactive mobility uses cell reselection rules.</p>
+  </div>
+</section>
+<section id="s46" class="topic-section">
+  <div class="topic-number">46</div>
+  <div>
+    <h2>Handover</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>Xn-based and NG-based handovers involve preparation, target-resource admission, UE execution, synchronization, path switching and data forwarding. Conditional handover and beam mobility extend the mobility toolbox.</p>
+  </div>
+</section>
+<section id="s47" class="topic-section">
+  <div class="topic-number">47</div>
+  <div>
+    <h2>VoNR</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>VoNR uses NR access with 5GC and IMS. SIP provides call signalling, SDP negotiates media, RTP carries voice media, and QoS flows provide appropriate treatment for conversational traffic.</p>
+  </div>
+</section>
+<section id="s48" class="topic-section">
+  <div class="topic-number">48</div>
+  <div>
+    <h2>EPS Fallback</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>When VoNR is unavailable or not preferred, an IMS voice call can trigger EPS fallback from NR/5GC toward LTE/EPC, where IMS voice is established using the LTE path.</p>
+  </div>
+</section>
+<section id="s49" class="topic-section">
+  <div class="topic-number">49</div>
+  <div>
+    <h2>RAT Fallback</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>RAT fallback moves the UE from NR to E-UTRA while retaining 5GC connectivity. It can use RRC release with redirection or handover depending on the deployment and procedure.</p>
+  </div>
+</section>
+<section id="s50" class="topic-section">
+  <div class="topic-number">50</div>
+  <div>
+    <h2>NSA Mobility and EN-DC</h2>
+    
+    <p>NSA mobility includes LTE-master/NR-secondary management, secondary-node addition/modification/release, measurement reporting and bearer coordination. MCG, SCG and split bearers must be understood when analysing EN-DC traces.</p>
+  </div>
+</section>
+<section id="s51" class="topic-section">
+  <div class="topic-number">51</div>
+  <div>
+    <h2>Network Planning</h2>
+    
+    <p>Engineering planning considers operating band, NR-ARFCN, GSCN, slot format, antenna configuration, transmit power, PCI, cyclic prefix, CSI-RS, PT-RS, PRACH, neighbours, tracking areas, RAN notification areas and throughput expectations.</p>
+  </div>
+</section>
+<section id="s52" class="topic-section">
+  <div class="topic-number">52</div>
+  <div>
+    <h2>PCI Planning</h2>
+    
+    <p>Physical Cell Identity planning must avoid PCI collision and PCI confusion. Neighbour relationships and reuse patterns should be checked so neighbouring cells can be distinguished correctly.</p>
+  </div>
+</section>
+<section id="s53" class="topic-section">
+  <div class="topic-number">53</div>
+  <div>
+    <h2>PRACH Planning</h2>
+    
+    <p>PRACH planning includes format, configuration index, root sequence, zero-correlation zone, frequency allocation, cell radius, mobility assumptions and root-sequence reuse. Poor planning can create random-access collisions.</p>
+  </div>
+</section>
+<section id="s54" class="topic-section">
+  <div class="topic-number">54</div>
+  <div>
+    <h2>Dynamic Spectrum Sharing</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>DSS allows LTE and NR to coexist on a shared carrier. Scheduler coordination, LTE CRS overhead, NR resource restrictions, frequency alignment and performance impacts must be considered.</p>
+  </div>
+</section>
+<section id="s55" class="topic-section">
+  <div class="topic-number">55</div>
+  <div>
+    <h2>Measurements and KPIs</h2>
+    
+    <p>Important radio measurements include SS-RSRP, SS-RSRQ and SINR. Engineering analysis should correlate radio quality with throughput, BLER, retransmissions, latency, handover performance and accessibility.</p>
+  </div>
+</section>
+<section id="s56" class="topic-section">
+  <div class="topic-number">56</div>
+  <div>
+    <h2>Testing and Troubleshooting</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>For each procedure, inspect logs for expected messages, timestamps, identities, cause values, radio measurements, timers and retransmissions. A useful workflow is symptom → signalling checkpoint → radio checkpoint → transport/core checkpoint → root cause → KPI impact.</p>
+  </div>
+</section>
+<section id="s57" class="topic-section">
+  <div class="topic-number">57</div>
+  <div>
+    <h2>Random Access Troubleshooting</h2>
+    
+    <p>Use the sequence: SSB detected → PRACH transmitted → RAR received → Msg3 transmitted → contention resolved → RRC setup. A failure at each stage points to a different class of RF, configuration or signalling problem.</p>
+  </div>
+</section>
+<section id="s58" class="topic-section">
+  <div class="topic-number">58</div>
+  <div>
+    <h2>Registration Troubleshooting</h2>
+    
+    <p>Check cell selection, RRC establishment, NAS Registration Request, AMF reachability, authentication, security-mode completion, registration accept and any reject cause. Correlate UE, RAN and core timestamps.</p>
+  </div>
+</section>
+<section id="s59" class="topic-section">
+  <div class="topic-number">59</div>
+  <div>
+    <h2>PDU Session Troubleshooting</h2>
+    
+    <p>Check DNN, subscription, slice selection, SMF response, UPF selection, N4 configuration, PDU Session Establishment Accept and GTP-U tunnel creation. A successful registration does not guarantee successful session establishment.</p>
+  </div>
+</section>
+<section id="s60" class="topic-section">
+  <div class="topic-number">60</div>
+  <div>
+    <h2>Mobility Troubleshooting</h2>
+    
+    <p>Check measurement events, serving/target cell quality, neighbour configuration, target admission, handover command, random access at target, path switch and data forwarding. Distinguish radio failure from transport/core failure.</p>
+  </div>
+</section>
+<section id="s61" class="topic-section">
+  <div class="topic-number">61</div>
+  <div>
+    <h2>Voice Troubleshooting</h2>
+    
+    <p>For VoNR, verify IMS registration, SIP signalling, SDP/media negotiation, voice capability, QoS-flow creation and RTP. For fallback, verify the trigger, target LTE availability and continuation of IMS signalling.</p>
+  </div>
+</section>
+<section id="s62" class="topic-section">
+  <div class="topic-number">62</div>
+  <div>
+    <h2>5G-Advanced / Release 18</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>5G-Advanced extends the 5G platform with areas including XR, AI/ML, edge computing, network slicing enhancements, NTN, positioning, RedCap, sidelink evolution, energy saving, industrial IoT, UAV-related capabilities and multicast/broadcast improvements.</p>
+  </div>
+</section>
+<section id="s63" class="topic-section">
+  <div class="topic-number">63</div>
+  <div>
+    <h2>5G-Advanced / Release 19 Evolution</h2>
+    <div class="diagram"><span>UE</span><b>→</b><span>NG-RAN</span><b>→</b><span>5GC</span><b>→</b><span>Data / Service</span></div>
+    <p>Treat Release 19 evolution separately from foundational Release-15 theory. Areas include AI/ML enhancements for NG-RAN and mobility, NTN evolution, positioning, MIMO evolution, XR/media, ambient IoT, network intelligence and automation.</p>
+  </div>
+</section>
+<section id="s64" class="topic-section">
+  <div class="topic-number">64</div>
+  <div>
+    <h2>Practical Engineer&#x27;s Checklist</h2>
+    
+    <p>For trace analysis, always establish the timeline, identify UE/cell/core entities, verify synchronization and access, follow RRC/NAS/NGAP/SBI/user-plane layers, check radio measurements and timers, locate the first failure—not merely the final reject—and confirm the root cause with a second independent trace or KPI where possible.</p>
+  </div>
+</section>
 </article></div></main>
-<footer class="site-footer"><div class="container copyright"><span>© 2026 Nishant Tyagi</span><span>Telecom Knowledge Hub</span></div></footer>
+<footer class="site-footer"><div class="container footer-grid">
+<div><h3>Telecom Knowledge Hub</h3><p>5G / NR engineering reference covering theory and practical troubleshooting.</p></div>
+<div><h3>Topics</h3><a href="5g-architecture.html">5G / NR</a><a href="6g.html">6G</a><a href="lte.html">LTE</a><a href="sip.html">SIP</a></div>
+<div><h3>Connect</h3><a href="https://www.linkedin.com/in/nishant-tyagi-5ab70824a/">LinkedIn</a><a href="../about.html">About / Contact</a></div>
+</div><div class="container copyright"><span>© 2026 Nishant Tyagi</span><span>5G / NR · Telecom Knowledge Hub</span></div></footer>
 <script>
 const q=document.getElementById('siteSearch');
-q.addEventListener('input',()=>{const v=q.value.toLowerCase().trim();
-document.querySelectorAll('.article-content section').forEach(s=>s.style.display=!v||s.innerText.toLowerCase().includes(v)?'':'none')})
-</script></body></html>
+q.addEventListener('input',()=>{const v=q.value.toLowerCase().trim();document.querySelectorAll('.topic-section').forEach(el=>el.style.display=!v||el.innerText.toLowerCase().includes(v)?'':'none')});
+</script>
+</body></html>
