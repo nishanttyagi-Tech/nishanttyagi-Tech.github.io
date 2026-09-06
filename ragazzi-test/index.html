@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pizzeria Ragazzi Hersel – Online Speisekarte und Bestellung">
+  <title>Pizzeria Ragazzi Hersel | Online bestellen</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="notice">Bestellungen können nur bis 21:30 Uhr aufgenommen werden. Wir schließen um 22:00 Uhr.</div>
+    <div class="nav container">
+      <a class="brand" href="index.html"><span class="brand-mark">R</span><span><strong>Pizzeria Ragazzi</strong><small>Hersel</small></span></a>
+      <nav><a href="#home">Startseite</a><a href="#menu">Speisekarte</a><a href="#contact">Kontakt</a></nav>
+      <button class="cart-btn" id="cartButton">Warenkorb <b id="cartCount">0</b></button>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero container">
+      <div class="hero-copy">
+        <span class="eyebrow">PIZZERIA RAGAZZI · HERSEL</span>
+        <h1>Lecker bestellen.<br><em>Einfach genießen.</em></h1>
+        <p>Pizza, Pasta, Salate, Snacks und viele weitere Gerichte bequem online bestellen.</p>
+        <div class="hero-actions"><a class="primary" href="#menu">Speisekarte ansehen</a><button class="secondary" id="deliveryButton">Lieferung oder Abholung</button></div>
+      </div>
+      <div class="hero-card"><div class="pizza-art"><span>🍕</span></div><div class="hero-card-text"><strong>Heute geöffnet</strong><small>Mo, Mi–Fr 12:00–22:30 · Sa 15:00–22:30 · So 12:00–22:00</small></div></div>
+    </section>
+
+    <section class="order-strip"><div class="container order-grid"><div><span class="step">01</span><strong>Lieferung</strong><small>Wir bringen deine Bestellung zu dir</small></div><div><span class="step">02</span><strong>Abholung</strong><small>Bestellen und selbst abholen</small></div><div><span class="step">03</span><strong>Online bezahlen</strong><small>Bequem und sicher bestellen</small></div></div></section>
+
+    <section class="menu-section container" id="menu">
+      <div class="section-head"><div><span class="eyebrow">UNSERE SPEISEKARTE</span><h2>Was darf es sein?</h2></div><p>Die bestehende Speisekarte bleibt vollständig erhalten. Hier starten wir mit der gleichen Kategorien-Struktur.</p></div>
+      <div class="categories" id="categories"></div>
+    </section>
+
+    <section class="info-section container">
+      <div class="info-card"><span>📍</span><div><h3>Abholung & Lieferung</h3><p>Wähle beim Bestellen, ob wir liefern oder du deine Bestellung abholst.</p></div></div>
+      <div class="info-card"><span>💳</span><div><h3>Zahlungsmöglichkeiten</h3><p>Barzahlung, PayPal und EC-Karte werden als Optionen vorbereitet.</p></div></div>
+      <div class="info-card"><span>🕐</span><div><h3>Öffnungszeiten</h3><p>Montag, Mittwoch–Freitag 12:00–22:30 · Samstag 15:00–22:30 · Sonntag 12:00–22:00.</p></div></div>
+    </section>
+
+    <section class="contact container" id="contact"><div><span class="eyebrow">KONTAKT</span><h2>Pizzeria Ragazzi Hersel</h2><p>Rheinstr. 158 · 53332 Bornheim-Hersel</p><p>Telefon: 02222-810220</p></div><div class="contact-badge">ONLINE<br>BESTELLEN</div></section>
+  </main>
+
+  <aside class="cart-panel" id="cartPanel"><div class="cart-head"><h2>Warenkorb</h2><button id="closeCart">×</button></div><div id="cartItems" class="cart-items"><p class="empty">Dein Warenkorb ist noch leer.</p></div><div class="cart-total"><span>Gesamt</span><strong id="cartTotal">0,00 €</strong></div><button class="checkout">Zur Kasse</button></aside>
+  <div class="overlay" id="overlay"></div>
+  <script src="app.js"></script>
+</body>
+</html>
